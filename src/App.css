@@ -10,6 +10,11 @@
   gap: 20px;
 }
 
+.current-score,.best-score{
+  display: flex;
+  gap: 5px;
+}
+
 .card-section{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
