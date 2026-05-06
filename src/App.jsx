@@ -21,6 +21,15 @@ const Score = ({ className, label, value }) => {
   )
 }
 
+const Button = ({className, label, onClick}) =>{
+  return(
+    <>
+    <button className={className} onClick={onClick}>{label}</button>
+    </>
+  )
+
+}
+
 function App() {
 
   const [score, setScore] = useState(0);
@@ -34,7 +43,7 @@ function App() {
         <div className="score-section">
           <Score className="current-score" label="Score" value={score} />
           <Score className="best-score" label="Best Score" value={bestScore} />
-          <button>Reset Game</button>
+          <Button label="Reset Game" className="reset-btn"/>
         </div>
         <div className="card-section">
           <div className="card">
