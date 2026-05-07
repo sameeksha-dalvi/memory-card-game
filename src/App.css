@@ -1,8 +1,22 @@
+body {
+  margin: 0px;
+  min-height: 100vh;
+}
+
 .main-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   gap:20px;
+   background:
+    linear-gradient(
+      rgba(54, 52, 52, 0.75),
+      rgba(27, 26, 26, 0.75)
+    ),
+    url('./assets/images/memory_game_bg.png');
+
+  background-size: cover;
+  background-position: center;
 }
 
 .score-section{
