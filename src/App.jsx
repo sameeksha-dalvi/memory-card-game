@@ -42,6 +42,17 @@ const Button = ({ className, label, onClick }) => {
 
 }
 
+const Card = ({ imgName, label }) => {
+  return (
+    <>
+      <div className="card">
+        <div className="card-img-section"><img className="card-image" src={imgName} /></div>
+        <div className="card-name-section">{label}</div>
+      </div>
+    </>
+  )
+}
+
 function App() {
 
   const [score, setScore] = useState(0);
@@ -57,54 +68,18 @@ function App() {
           <Button label="Reset Game" className="reset-btn" />
         </div>
         <div className="card-section">
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={calciferImg} /></div>
-            <div className="card-name-section">Calcifer</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={chihiroImg} /></div>
-            <div className="card-name-section">Chihiro</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={hakuImg} /></div>
-            <div className="card-name-section">Haku</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={jijiImg} /></div>
-            <div className="card-name-section">Jiji</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={kikiImg} /></div>
-            <div className="card-name-section">Kiki</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={meiImg} /></div>
-            <div className="card-name-section">Mei</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={muskaImg} /></div>
-            <div className="card-name-section">Muska</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={nofaceImg} /></div>
-            <div className="card-name-section">No Face</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={satsukiImg} /></div>
-            <div className="card-name-section">Satsuki</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={sheetaImg} /></div>
-            <div className="card-name-section">Sheeta</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={sophieImg} /></div>
-            <div className="card-name-section">Sophie</div>
-          </div>
-          <div className="card">
-            <div className="card-img-section"><img className="card-image" src={totoroImg} /></div>
-            <div className="card-name-section">Totoro</div>
-          </div>
+          <Card label="Calcifer" imgName={calciferImg} />
+          <Card label="Chihiro" imgName={chihiroImg} />
+          <Card label="Haku" imgName={hakuImg} />
+          <Card label="Jiji" imgName={jijiImg} />
+          <Card label="Kiki" imgName={kikiImg} />
+          <Card label="Mei" imgName={meiImg} />
+          <Card label="Muska" imgName={muskaImg} />
+          <Card label="No Face" imgName={nofaceImg} />
+          <Card label="Satsuki" imgName={satsukiImg} />
+          <Card label="Sheeta" imgName={sheetaImg} />
+          <Card label="Sophie" imgName={sophieImg} />
+          <Card label="Totoro" imgName={totoroImg} />
 
         </div>
       </div>
