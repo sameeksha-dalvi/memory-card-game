@@ -85,9 +85,16 @@ function App() {
 
     } else {
 
+
+      const newScore = score + 1;
+
       setClickedCards([...clickedCards, id]);
 
-      setScore((prevScore) => prevScore + 1);
+      setScore(newScore);
+
+      if (newScore > bestScore) {
+        setBestScore(newScore);
+      }
 
     }
   }
