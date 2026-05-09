@@ -68,9 +68,6 @@ const imageMap = {
   "Yuki": yukiImg,
 };
 
-const handleCardClick = (id) => {
-  console.log(id);
-}
 
 
 function App() {
@@ -79,6 +76,22 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [characters, setCharacters] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
+
+  const handleCardClick = (id) => {
+    if (clickedCards.includes(id)) {
+
+      setScore(0);
+      setClickedCards([]);
+
+    } else {
+
+      setClickedCards([...clickedCards, id]);
+
+      setScore((prevScore) => prevScore + 1);
+
+    }
+  }
+
 
   useEffect(() => {
     fetch("https://ghibliapi.vercel.app/people")
