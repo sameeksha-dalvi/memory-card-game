@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import pazuImg from './assets/images/Pazu.png';
 import chihiroImg from './assets/images/Chihiro.png';
@@ -42,21 +42,59 @@ const Button = ({ className, label, onClick }) => {
 
 }
 
-const Card = ({ imgName, label }) => {
+const Card = ({ id, imgName, label, onClick }) => {
   return (
     <>
-      <div className="card">
-        <div className="card-img-section"><img className="card-image" src={imgName} /></div>
+      <div className="card" onClick={() => onClick(id)}>
+        <div className="card-img-section"><img className="card-image" src={imgName} alt={label} /></div>
         <div className="card-name-section">{label}</div>
       </div>
     </>
   )
 }
 
+const imageMap = {
+  "Chihiro Ogino": chihiroImg,
+  "Haku": hakuImg,
+  "Jiji": jijiImg,
+  "Kiki": kikiImg,
+  "Mei Kusakabe": meiImg,
+  "Colonel Muska": muskaImg,
+  "Satsuki Kusakabe": satsukiImg,
+  "Totoro": totoroImg,
+  "Pazu": pazuImg,
+  "San": sanImg,
+  "Ursula": ursulaImg,
+  "Yuki": yukiImg,
+};
+
+const handleCardClick = (id) => {
+  console.log(id);
+}
+
+
 function App() {
 
   const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0)
+  const [bestScore, setBestScore] = useState(0);
+  const [characters, setCharacters] = useState([]);
+  const [clickedCards, setClickedCards] = useState([]);
+
+  useEffect(() => {
+    fetch("https://ghibliapi.vercel.app/people")
+      .then((response) => response.json())
+      .then((data) => {
+
+        const filteredCharacters = data.filter(
+          (character) => imageMap[character.name]
+        );
+
+        setCharacters(filteredCharacters);
+      })
+      .catch((error) => console.log(error));
+
+  }, []);
+
   return (
 
     <>
@@ -68,18 +106,15 @@ function App() {
           <Button label="Reset Game" className="reset-btn" />
         </div>
         <div className="card-section">
-          <Card label="Chihiro Ogino" imgName={chihiroImg} />
-          <Card label="Haku" imgName={hakuImg} />
-          <Card label="Jiji" imgName={jijiImg} />
-          <Card label="Kiki" imgName={kikiImg} />
-          <Card label="Mei Kusakabe" imgName={meiImg} />
-          <Card label="Colonel Muska" imgName={muskaImg} />
-          <Card label="Satsuki Kusakabe" imgName={satsukiImg} />
-          <Card label="Totoro" imgName={totoroImg} />
-          <Card label="Pazu" imgName={pazuImg} />
-          <Card label="San" imgName={sanImg} />
-          <Card label="Ursula" imgName={ursulaImg} />
-          <Card label="Yuki" imgName={yukiImg} />
+          {characters.map((character) => (
+            <Card
+              key={character.id}
+              id={character.id}
+              label={character.name}
+              imgName={imageMap[character.name]}
+              onClick={handleCardClick}
+            />
+          ))}
         </div>
       </div>
 
