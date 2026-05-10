@@ -13,6 +13,21 @@ import ursulaImg from './assets/images/Ursula.png';
 import yukiImg from './assets/images/Yuki.png';
 import totoroImg from './assets/images/Totoro.png';
 
+import clickSoundFile from "./assets/sounds/click.mp3";
+import shuffleSoundFile from "./assets/sounds/shuffle.mp3";
+import successSoundFile from "./assets/sounds/best-score.mp3";
+import gameOverSoundFile from "./assets/sounds/game-over.mp3";
+
+const clickSound = new Audio(clickSoundFile);
+const shuffleSound = new Audio(shuffleSoundFile);
+const successSound = new Audio(successSoundFile);
+const gameOverSound = new Audio(gameOverSoundFile);
+
+const playSound = (sound) => {
+  sound.currentTime = 0;
+  sound.play();
+};
+
 const Header = ({ label }) => {
   return (
     <>
@@ -105,7 +120,7 @@ function App() {
     }, 300);
 
     if (clickedCards.includes(id)) {
-
+      playSound(gameOverSound);
       setScore(0);
       setClickedCards([]);
 
@@ -119,6 +134,7 @@ function App() {
       setScore(newScore);
 
       if (newScore > bestScore) {
+        playSound(successSound);
         setBestScore(newScore);
         setBestScoreAnimation(true);
 
@@ -135,16 +151,16 @@ function App() {
   }
 
   const handleResetBtn = () => {
+    playSound(clickSound);
     setScore(0);
     setBestScore(0);
     setClickedCards([]);
-    shuffleCards();
   }
 
   const shuffleCards = () => {
 
     setIsShuffling(true);
-
+    playSound(shuffleSound);
     setTimeout(() => {
 
       setCharacters(
