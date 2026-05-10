@@ -161,12 +161,16 @@ function App() {
 
     <>
       <div className="main-container">
-        <Header label="Memory Card Game" />
-        <div className="score-section">
-          <Score className="current-score" label="Score" value={score} isAnimating={scoreAnimation} />
-          <Score className="best-score" label="Best Score" value={bestScore} isAnimating={bestScoreAnimation} />
-          <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} />
+        <div className='game-header-section'>
+          <Header label="Ghibli Memory Game" />
+          <div className="score-section">
+            <Score className="current-score" label="Score" value={score} isAnimating={scoreAnimation} />
+            <Score className="best-score" label="Best Score" value={bestScore} isAnimating={bestScoreAnimation} />
+            <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} />
+          </div>
         </div>
+
+
         <div className="card-section">
           {characters.map((character) => (
             <Card
