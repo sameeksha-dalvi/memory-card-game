@@ -124,6 +124,17 @@ function App() {
 
       setScore(newScore);
 
+      if (newScore === characters.length) {
+        playSound(successSound);
+        setBestScore(newScore);
+
+        setScore(0);
+        setClickedCards([]);
+
+        shuffleCards();
+        return;
+      }
+
       if (newScore > bestScore) {
         playSound(successSound);
         setBestScore(newScore);
