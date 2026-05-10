@@ -100,7 +100,9 @@ body {
 }
 
 .reset-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
 }
 
 .card-section {
@@ -137,7 +139,24 @@ body {
 }
 
 .card:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
+  animation: tapFlash 0.2s ease;
+}
+
+@keyframes tapFlash {
+  0% {
+    transform: scale(0.96);
+  }
+
+  50% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .card-img-section {
@@ -212,4 +231,62 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+.btn-icon {
+  display: none;
+}
+
+@media (max-width: 600px) {
+
+  .game-header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-header {
+    font-size: 28px;
+    margin-left: 0;
+  }
+
+  .score-section {
+    font-size: 16px;
+    margin-right: 0;
+  }
+
+  .card-section {
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+    gap: 8px;
+  }
+
+  .card {
+    padding: 6px;
+  }
+
+  .card-name-section {
+    font-size: 0.65rem;
+  }
+
+
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+  }
+
+  .btn-icon svg {
+    transition: transform 0.3s ease;
+  }
+
+  .reset-btn:active .btn-icon svg {
+    transform: rotate(180deg);
+  }
+
 }

@@ -18,6 +18,11 @@ import shuffleSoundFile from "./assets/sounds/shuffle.mp3";
 import successSoundFile from "./assets/sounds/best-score.mp3";
 import gameOverSoundFile from "./assets/sounds/game-over.mp3";
 
+import Header from "./components/Header";
+import Score from "./components/Score";
+import Button from "./components/Button";
+import Card from "./components/Card";
+
 const clickSound = new Audio(clickSoundFile);
 const shuffleSound = new Audio(shuffleSoundFile);
 const successSound = new Audio(successSoundFile);
@@ -28,45 +33,31 @@ const playSound = (sound) => {
   sound.play();
 };
 
-const Header = ({ label }) => {
+
+const ResetIcon = () => {
   return (
-    <>
-      <h1 className='game-header'>{label}</h1>
-    </>
-  )
-}
-
-const Score = ({ className, label, value, isAnimating }) => {
-
-  return (
-    <>
-      <div className={className}>
-        <p>{label}:</p>
-        <p className={isAnimating ? "score-pop" : ""}>{value}</p>
-      </div>
-    </>
-  )
-}
-
-const Button = ({ className, label, onClick }) => {
-  return (
-    <>
-      <button className={className} onClick={onClick}>{label}</button>
-    </>
-  )
-
-}
-
-const Card = ({ id, imgName, label, onClick, isShuffling }) => {
-  return (
-    <>
-      <div className={`card ${isShuffling ? "shuffle" : ""}`} onClick={() => onClick(id)}>
-        <div className="card-img-section"><img className="card-image" src={imgName} alt={label} /></div>
-        <div className="card-name-section">{label}</div>
-      </div>
-    </>
-  )
-}
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3 12a9 9 0 1 0 3-6.7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 4v6h6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
 
 const imageMap = {
   "Chihiro Ogino": chihiroImg,
@@ -145,8 +136,6 @@ function App() {
 
       shuffleCards();
 
-
-
     }
   }
 
@@ -182,11 +171,10 @@ function App() {
           <div className="score-section">
             <Score className="current-score" label="Score" value={score} isAnimating={scoreAnimation} />
             <Score className="best-score" label="Best Score" value={bestScore} isAnimating={bestScoreAnimation} />
-            <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} />
+            <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} icon={<ResetIcon />}
+            />
           </div>
         </div>
-
-
         <div className="card-section">
           {characters.map((character) => (
             <Card
@@ -200,7 +188,6 @@ function App() {
           ))}
         </div>
       </div>
-
     </>
   )
 }
