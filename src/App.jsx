@@ -21,11 +21,11 @@ const Header = ({ label }) => {
   )
 }
 
-const Score = ({ className, label, value }) => {
+const Score = ({ className, label, value, isAnimating }) => {
 
   return (
     <>
-      <div className={className}>
+      <div className={`${className} ${isAnimating ? "score-pop" : ""}`}>
         <p>{label}:</p>
         <p>{value}</p>
       </div>
@@ -77,6 +77,8 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [isShuffling, setIsShuffling] = useState(false);
+  const [scoreAnimation, setScoreAnimation] = useState(false);
+  const [bestScoreAnimation, setBestScoreAnimation] = useState(false);
 
 
   useEffect(() => {
@@ -95,6 +97,13 @@ function App() {
   }, []);
 
   const handleCardClick = (id) => {
+
+    setScoreAnimation(true);
+
+    setTimeout(() => {
+      setScoreAnimation(false);
+    }, 300);
+
     if (clickedCards.includes(id)) {
 
       setScore(0);
@@ -111,9 +120,16 @@ function App() {
 
       if (newScore > bestScore) {
         setBestScore(newScore);
+        setBestScoreAnimation(true);
+
+        setTimeout(() => {
+          setBestScoreAnimation(false);
+        }, 300);
       }
 
       shuffleCards();
+
+
 
     }
   }
@@ -147,8 +163,8 @@ function App() {
       <div className="main-container">
         <Header label="Memory Card Game" />
         <div className="score-section">
-          <Score className="current-score" label="Score" value={score} />
-          <Score className="best-score" label="Best Score" value={bestScore} />
+          <Score className="current-score" label="Score" value={score} isAnimating={scoreAnimation} />
+          <Score className="best-score" label="Best Score" value={bestScore} isAnimating={bestScoreAnimation} />
           <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} />
         </div>
         <div className="card-section">
