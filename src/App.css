@@ -37,15 +37,6 @@ body {
   gap:20px
 }
 
-/* .card{
-  border: 2px dashed blue;
-  
-}
-
-.card-image{
-  width: 50px;
-  height: auto;
-} */
 
 .card {
   background-color: #ffffff;
@@ -100,4 +91,31 @@ body {
   text-align: center;
 
   color: #333;
+}
+
+.card {
+  transition: transform 0.4s ease;
+}
+
+.shuffle {
+  animation: shuffleMagic 0.4s ease;
+}
+
+@keyframes shuffleMagic {
+
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(0.9) rotate(-6deg);
+  }
+
+  50% {
+    transform: scale(1.05) rotate(6deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }

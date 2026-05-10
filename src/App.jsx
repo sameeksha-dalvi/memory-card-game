@@ -42,10 +42,10 @@ const Button = ({ className, label, onClick }) => {
 
 }
 
-const Card = ({ id, imgName, label, onClick }) => {
+const Card = ({ id, imgName, label, onClick, isShuffling }) => {
   return (
     <>
-      <div className="card" onClick={() => onClick(id)}>
+      <div className={`card ${isShuffling ? "shuffle" : ""}`} onClick={() => onClick(id)}>
         <div className="card-img-section"><img className="card-image" src={imgName} alt={label} /></div>
         <div className="card-name-section">{label}</div>
       </div>
@@ -76,6 +76,23 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [characters, setCharacters] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
+  const [isShuffling, setIsShuffling] = useState(false);
+
+
+  useEffect(() => {
+    fetch("https://ghibliapi.vercel.app/people")
+      .then((response) => response.json())
+      .then((data) => {
+
+        const filteredCharacters = data.filter(
+          (character) => imageMap[character.name]
+        );
+
+        setCharacters(filteredCharacters);
+      })
+      .catch((error) => console.log(error));
+
+  }, []);
 
   const handleCardClick = (id) => {
     if (clickedCards.includes(id)) {
@@ -96,6 +113,8 @@ function App() {
         setBestScore(newScore);
       }
 
+      shuffleCards();
+
     }
   }
 
@@ -103,22 +122,24 @@ function App() {
     setScore(0);
     setBestScore(0);
     setClickedCards([]);
+    shuffleCards();
   }
 
-  useEffect(() => {
-    fetch("https://ghibliapi.vercel.app/people")
-      .then((response) => response.json())
-      .then((data) => {
+  const shuffleCards = () => {
 
-        const filteredCharacters = data.filter(
-          (character) => imageMap[character.name]
-        );
+    setIsShuffling(true);
 
-        setCharacters(filteredCharacters);
-      })
-      .catch((error) => console.log(error));
+    setTimeout(() => {
 
-  }, []);
+      setCharacters(
+        [...characters].sort(() => Math.random() - 0.5)
+      );
+
+      setIsShuffling(false);
+
+    }, 400);
+
+  }
 
   return (
 
@@ -138,6 +159,7 @@ function App() {
               label={character.name}
               imgName={imageMap[character.name]}
               onClick={handleCardClick}
+              isShuffling={isShuffling}
             />
           ))}
         </div>
