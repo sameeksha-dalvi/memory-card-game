@@ -99,6 +99,11 @@ function App() {
     }
   }
 
+  const handleResetBtn = () => {
+    setScore(0);
+    setBestScore(0);
+    setClickedCards([]);
+  }
 
   useEffect(() => {
     fetch("https://ghibliapi.vercel.app/people")
@@ -123,7 +128,7 @@ function App() {
         <div className="score-section">
           <Score className="current-score" label="Score" value={score} />
           <Score className="best-score" label="Best Score" value={bestScore} />
-          <Button label="Reset Game" className="reset-btn" />
+          <Button label="Reset Game" className="reset-btn" onClick={handleResetBtn} />
         </div>
         <div className="card-section">
           {characters.map((character) => (
