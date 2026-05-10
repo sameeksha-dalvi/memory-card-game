@@ -25,9 +25,9 @@ const Score = ({ className, label, value, isAnimating }) => {
 
   return (
     <>
-      <div className={`${className} ${isAnimating ? "score-pop" : ""}`}>
+      <div className={className}>
         <p>{label}:</p>
-        <p>{value}</p>
+        <p className={isAnimating ? "score-pop" : ""}>{value}</p>
       </div>
     </>
   )

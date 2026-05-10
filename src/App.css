@@ -16,17 +16,14 @@
   font-display: swap;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
 
 body {
   margin: 0px;
   min-height: 100vh;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
   background:
     linear-gradient(rgba(54, 52, 52, 0.75),
       rgba(27, 26, 26, 0.75)),
@@ -34,6 +31,15 @@ body {
 
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
 }
 
 .game-header-section {
@@ -121,7 +127,8 @@ body {
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  will-change: transform;
 }
 
 .card:hover {
